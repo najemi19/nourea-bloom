@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nouréa Bloom | الصحة والجمال • متجر وفرصة عمل</title>
+  <meta name="description" content="Nouréa Bloom — منصة أنثوية ذكية للصحة والجمال: متجر منتجات مختارة، التسجيل بالعمولة، مدونة، وإرشاد ومتابعة، مع أتمتة وذكاء تشغيلي.">
+  <style>
+    :root{
+      /* Palette */
+      --mint:#a7f3d0;
+      --mint-deep:#10b981;
+      --mint-dark:#059669;
+      --rose:#fbcfe8;
+      --rose-deep:#f472b6;
+      --gold:#f5e6c8;
+      --ink:#1f2937;
+      --ink-soft:#6b7280;
+      --white:#ffffff;
+      --bg:#fdfcfb;
+      --card:#ffffff;
+      --line:rgba(31,41,55,.1);
+      --radius:14px;
+      --shadow:0 8px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0; background:linear-gradient(180deg,var(--mint) 0%,var(--rose) 100%);
+      min-height:100%; color:var(--ink);
+      font-family:"Segoe UI","Noto Sans Arabic",system-ui,Arial,sans-serif;
+      scroll-behavior:smooth
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Social rail */
+    .social-rail{
+      position:fixed;left:0;top:0;bottom:0;z-index:60;width:60px;padding:10px 8px;
+      display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:flex-start;
+      background:rgba(255,255,255,.55);backdrop-filter:blur(10px);border-right:1px solid var(--line);
+      box-shadow:0 10px 30px rgba(0,0,0,.06)
+    }
+    .social-rail a{
+      width:42px;height:42px;border-radius:50%;background:var(--mint-deep);display:flex;align-items:center;justify-content:center;
+      box-shadow:var(--shadow)
+    }
+    .rail-tag{margin-top:auto;font-size:12px;color:var(--ink-soft);writing-mode:vertical-rl;transform:rotate(180deg)}
+
+    /* Layout paddings */
+    header,.page,footer{padding-left:78px}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line)
+    }
+    .nav{
+      max-width:1200px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px;justify-content:space-between
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo-wrap{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--rose),var(--mint));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+    .logo-wrap svg{width:24px;height:24px}
+    .brand-name{font-weight:800;font-size:18px;color:var(--mint-dark);letter-spacing:.3px}
+    nav.menu{display:flex;gap:12px;flex-wrap:wrap}
+    nav.menu a{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.7);border:1px solid var(--line)}
+    nav.menu a:hover,nav.menu a.active{background:var(--gold)}
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{border:none;border-radius:12px;padding:9px 12px;cursor:pointer;font-weight:700;box-shadow:var(--shadow)}
+    .btn.solid{background:var(--mint-deep);color:#fff}
+    .btn.solid:hover{background:var(--mint-dark)}
+    .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+    .pill{display:inline-flex;gap:6px;align-items:center;padding:8px 10px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+    .lang{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;cursor:pointer}
+    .cart-count{display:inline-flex;min-width:20px;height:20px;border-radius:999px;background:var(--rose-deep);color:#fff;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+
+    /* Hero */
+    .hero{max-width:1200px;margin:0 auto;padding:28px 18px 8px}
+    .hero-card{
+      border-radius:22px;background:linear-gradient(180deg,#ffffffcc,#fff);
+      border:1px solid var(--line);box-shadow:var(--shadow);padding:24px;position:relative;overflow:hidden
+    }
+    .shine{position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,var(--gold),transparent 60%)}
+    .hero h1{font-size:30px;margin:0 0 8px;font-weight:900;color:var(--mint-dark);opacity:0;transform:translateY(-18px);animation:reveal .9s ease forwards}
+    .hero p.lead{margin:0 0 14px;color:#374151;line-height:1.8;opacity:0;transform:translateY(-16px);animation:reveal 1.2s ease .1s forwards}
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+    .badge{background:linear-gradient(180deg,var(--mint),#fff);border:1px solid var(--line);color:#065f46;padding:6px 10px;border-radius:999px;font-size:12px}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    @keyframes reveal{to{opacity:1;transform:none}}
+
+    /* Sections */
+    .page{max-width:1200px;margin:0 auto;padding-top:8px;padding-bottom:32px}
+    .section{margin-top:28px}
+    .section h2{margin:0 0 10px;color:#0f172a;font-size:24px;opacity:0;transform:translateY(16px);transition:.6s}
+    .section.in h2{opacity:1;transform:none}
+    .section .subtitle{color:var(--ink-soft);margin:0 0 14px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+    .grid{display:grid;gap:14px}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .cols-2{grid-template-columns:repeat(2,1fr)}
+
+    /* Store tabs and product cards */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+    .tab{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+    .tab.active{background:var(--gold)}
+    .products{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+    .prod{display:flex;gap:12px;align-items:flex-start}
+    .thumb{width:68px;height:68px;border-radius:12px;background:linear-gradient(135deg,var(--rose),var(--mint));border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+    .prod h3{margin:0 0 6px;font-size:16px}
+    .prod p{margin:0 0 10px;color:var(--ink-soft);font-size:13px;line-height:1.7}
+    .price{font-weight:900;color:#065f46}
+    .prod .inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+    /* Affiliate and forms */
+    .row{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+    label{display:block;margin-bottom:6px;font-size:13px;color:#111827}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff}
+    .hint{font-size:12px;color:var(--ink-soft)}
+    .ok{color:#065f46}
+    .warn{color:#b45309}
+    .notice{background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.4);color:#92400e;border-radius:12px;padding:10px}
+    .success{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.4);color:#065f46;border-radius:12px;padding:10px}
+
+    /* Blog & Coaching */
+    .post{display:flex;gap:12px}
+    .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--mint));margin-top:6px}
+    details{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff}
+    details summary{cursor:pointer;font-weight:700;color:#0f172a}
+
+    /* Policies & Footer */
+    .policies{margin-top:24px}
+    footer{background:rgba(255,255,255,.85);border-top:1px solid var(--line);padding:18px 18px 28px;color:#334155;text-align:center}
+
+    /* Feminine register button */
+    .btn-register {
+      display:inline-block;padding:12px 24px;border-radius:50px;
+      background:linear-gradient(135deg,#fbcfe8,#a7f3d0);color:#1f2937;
+      font-weight:bold;font-size:16px;font-family:'Segoe UI','Noto Sans Arabic',sans-serif;
+      text-align:center;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      transition:all .3s ease
+    }
+    .btn-register:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,0.2) }
+
+    /* Responsive */
+    @media(max-width:1000px){
+      .products{grid-template-columns:1fr 1fr}
+      .cols-3{grid-template-columns:1fr 1fr}
+      .row{grid-template-columns:1fr}
+    }
+    @media(max-width:760px){
+      header,.page,footer{padding-left:20px}
+      .social-rail{
+        top:auto;bottom:10px;left:10px;right:10px;width:auto;height:58px;border-radius:14px;border-right:none;border-top:1px solid var(--line);
+        flex-direction:row;align-items:center;justify-content:flex-start;gap:10px
+      }
+      .rail-tag{writing-mode:horizontal-tb;transform:none;margin-left:auto}
+      .products{grid-template-columns:1fr}
+      nav.menu{display:none}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Social Media Rail -->
+  <aside class="social-rail" aria-label="قنوات التواصل">
+    <a id="waLink" href="#" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M20.52 3.48A11.94 11.94 0 0 0 12.01 0C5.4 0 .06 5.34.06 11.95c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.61a12.02 12.02 0 0 0 5.74 1.46h.01c6.6 0 11.95-5.34 11.95-11.95 0-3.19-1.24-6.19-3.45-8.42ZM12.01 22.03h-.01a9.99 9.99 0 0 1-5.1-1.4l-.37-.22-3.72.95.99-3.63-.24-.37a9.97 9.97 0 0 1-1.54-5.41C2.02 6.45 6.47 2 12.01 2c2.67 0 5.18 1.04 7.07 2.92a9.95 9.95 0 0 1 2.93 7.06c0 5.54-4.54 10.05-10 10.05Zm5.6-7.52c-.31-.16-1.82-.9-2.1-1.01-.28-.1-.49-.16-.7.16-.21.31-.81 1-1 1.2-.18.21-.37.23-.68.08-.31-.16-1.3-.48-2.47-1.52-.91-.81-1.53-1.8-1.7-2.11-.18-.31-.02-.48.14-.63.14-.14.31-.37.46-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.7-1.67-.96-2.29-.25-.6-.5-.52-.7-.53h-.6c-.2 0-.55.08-.84.39-.28.31-1.08 1.05-1.08 2.56s1.11 2.97 1.26 3.18c.16.21 2.19 3.34 5.3 4.68.74.32 1.31.51 1.76.66.74.23 1.41.2 1.94.12.59-.09 1.82-.74 2.08-1.45.26-.71.26-1.31.18-1.45-.08-.14-.28-.23-.59-.39Z"/></svg>
+    </a>
+    <a id="fbLink" href="#" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0h-21.35C.595 0 0 .595 0 1.326v21.348C0 23.404.595 24 1.326 24H12.82v-9.294H9.692v-3.62h3.129V8.413c0-3.1 1.894-4.788 4.66-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.765v2.316h3.59l-.467 3.62h-3.123V24h6.127C23.404 24 24 23.404 24 22.674V1.326C24 .595 23.404 0 22.675 0Z"/></svg>
+    </a>
+    <a id="igLink" href="#" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.2 0 3.584.012 4.85.07 1.17.055 1.97.24 2.43.403a4.9 4.9 0 0 1 1.77 1.153 4.9 4.9 0 0 1 1.152 1.77c.163.46.348 1.26.403 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.055 1.17-.24 1.97-.403 2.43a4.9 4.9 0 0 1-1.153 1.77 4.9 4.9 0 0 1-1.77 1.152c-.46.163-1.26.348-2.43.403-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.055-1.97-.24-2.43-.403a4.9 4.9 0 0 1-1.77-1.153 4.9 4.9 0 0 1-1.152-1.77c-.163-.46-.348-1.26-.403-2.43C2.175 15.584 2.163 15.2 2.163 12s.012-3.584.07-4.85c.055-1.17.24-1.97.403-2.43a4.9 4.9 0 0 1 1.153-1.77 4.9 4.9 0 0 1 1.77-1.152c.46-.163 1.26-.348 2.43-.403C8.416 2.175 8.8 2.163 12 2.163Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.45-3.2a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
+    </a>
+    <a id="ttLink" href="#" target="_blank" rel="noopener" title="TikTok" aria-label="TikTok">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M21 8.5a7.8 7.8 0 0 1-5.4-2.2v7.1a6.2 6.2 0 1 1-6.2-6.2c.4 0 .8 0 1.1.1v3.1a3.1 3.1 0 1 0 2.2 3V2h3.1a7.8 7.8 0 0 0 5.2 5.1V8.5Z"/></svg>
+    </a>
+    <a id="ytLink" href="#" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.1-2.14C19.62 3.5 12 3.5 12 3.5s-7.62 0-9.4.56A3.02 3.02 0 0 0 .5 6.2 31.8 31.8 0 0 0 0 12c0 1.98.18 3.93.5 5.8.3 1.03 1.08 1.84 2.1 2.14C4.38 20.5 12 20.5 12 20.5s7.62 0 9.4-.56a3.02 3.02 0 0 0 2.1-2.14c.32-1.87.5-3.82.5-5.8 0-1.98-.18-3.93-.5-5.8ZM9.75 15.5v-7l6.25 3.5-6.25 3.5Z"/></svg>
+    </a>
+    <div class="rail-tag" id="railTag">تابعني</div>
+  </aside>
+
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo-wrap" aria-hidden="true">
+          <!-- Lotus icon -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M32 10c7 8 9 16 9 16s8-3 13 4c-5 6-12 7-12 7s4 6 0 11c-6-3-10-5-10-5s-4 2-10 5c-4-5 0-11 0-11s-7-1-12-7c5-7 13-4 13-4s2-8 9-16Z" fill="url(#g)"/>
+            <defs><linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#fbcfe8"/><stop offset="1" stop-color="#a7f3d0"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="brand-name" id="brandName">Nouréa Bloom</div>
+      </div>
+      <nav class="menu" aria-label="التنقل">
+        <a href="#home" class="active" data-route id="navHome">الرئيسية</a>
+        <a href="#store" data-route id="navStore">المتجر</a>
+        <a href="#about" data-route id="navAbout">من نحن</a>
+        <a href="#contact" data-route id="navContact">اتصل بنا</a>
+        <a href="#blog" data-route id="navBlog">المدونة</a>
+        <a href="#coaching" data-route id="navCoach">الإرشاد والمتابعة</a>
+      </nav>
+      <div class="actions">
+        <button class="pill" id="cartBtn">🛒 <span id="cartCount" class="cart-count">0</span></button>
+        <button class="btn ghost" id="loginBtn">تسجيل الدخول</button>
+        <button class="btn solid" id="signupBtn">التسجيل</button>
+        <button class="lang" id="langToggle" aria-label="تغيير اللغة">FR</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-card">
+      <div class="shine" aria-hidden="true"></div>
+      <h1 id="heroTitle">جمالك يبدأ من نورك الداخلي</h1>
+      <p class="lead" id="heroLead">ويتفتح مع كل لحظة عناية وصحة — اكتشفي منتجات مختارة وفرصة عمل ذكية.</p>
+      <div class="badges">
+        <div class="badge" id="b1">طبيعي • حلال</div>
+        <div class="badge" id="b2">خصومات حتى 30%</div>
+        <div class="badge" id="b3">تدريب وإرشاد شخصي</div>
+      </div>
+      <div class="cta">
+        <a class="btn solid" data-cta="signup" href="#" target="_blank" rel="noopener" id="heroPrimary">ابدئي الآن</a>
+        <a class="btn ghost" href="#store" id="heroBrowse">تصفحي المتجر</a>
+        <!-- Feminine Google Form Register CTA -->
+        <a href="https://docs.google.com/forms/d/FORM_ID/viewform" target="_blank" rel="noopener" class="btn-register" id="heroGForm">✨ سجّل عبر النموذج</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="page">
+    <!-- Store -->
+    <section class="section" id="storeSec">
+      <h2 id="storeTitle">🛍️ المتجر — منتجات الصحة والجمال</h2>
+      <p class="subtitle" id="storeSub">منتجات مختارة بعناية لتناسب أسلوب حياتك: مكملات، مشروبات، عناية شخصية.</p>
+      <div class="card">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-cat="all" id="tabAll">الكل</button>
+          <button class="tab" data-cat="supplements" id="tabSupp">مكملات</button>
+          <button class="tab" data-cat="drinks" id="tabDrinks">مشروبات</button>
+          <button class="tab" data-cat="care" id="tabCare">عناية شخصية</button>
+          <button class="tab" data-cat="offers" id="tabOffers">عروض خاصة</button>
+        </div>
+        <div class="products" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <!-- Affiliate Join -->
+    <section class="section" id="affiliate">
+      <h2 id="affTitle">💼 فرصة العمل — التسويق بالعمولة</h2>
+      <p class="subtitle" id="affSub">نظام متكامل، ترقيات، تدريب، ولوحة تحكم. اصعد بالمستويات حتى محترف وقائد فريق.</p>
+
+      <div class="row">
+        <div class="card">
+          <h3 id="levelsTitle" style="margin-top:0">مستويات المسوّق</h3>
+          <details open><summary id="lvl1">🌱 مبتدئ</summary><p class="hint" id="lvl1d">التعرف على المنتجات، أول 10 مبيعات، تعلم الأساسيات.</p></details>
+          <details><summary id="lvl2">💼 نشط</summary><p class="hint" id="lvl2d">توسيع دائرة العملاء، بناء محتوى رقمي، بداية تكوين الفريق.</p></details>
+          <details><summary id="lvl3">🔥 محترف</summary><p class="hint" id="lvl3d">نظام نشر منتظم، حملات مدفوعة، نمو مستمر.</p></details>
+          <details><summary id="lvl4">👑 قائد فريق</summary><p class="hint" id="lvl4d">تدريب الفريق، أهداف شهرية، قيادة وثقافة أداء.</p></details>
+          <div class="notice" id="earnNote">الدخل مرتبط بالنشاط والالتزام، ولا نعد بعائد ثابت. النتائج تعكس جهدك والتزامك.</div>
+          <div style="margin-top:10px" class="cta">
+            <a class="btn solid" data-cta="joinTeam" href="#" target="_blank" rel="noopener" id="joinTeamBtn">انضم لفريقي الآن</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="regTitle" style="margin-top:0">التسجيل الذكي</h3>
+          <p class="hint" id="regHint">أدخل بياناتك. سيتم حفظ كود الإحالة تلقائيًا وربطك بالفريق.</p>
+          <form id="regForm" autocomplete="on">
+            <label for="fullName" id="lblName">الاسم الكامل</label>
+            <input id="fullName" name="name" type="text" required placeholder="مثال: فاطمة الزهراء" />
+
+            <label for="email" id="lblEmail">البريد الإلكتروني</label>
+            <input id="email" name="email" type="email" required placeholder="example@email.com" />
+
+            <label for="phone" id="lblPhone">رقم الهاتف</label>
+            <input id="phone" name="phone" type="tel" required placeholder="+2126..." />
+
+            <label for="level" id="lblLevel">المستوى الحالي</label>
+            <select id="level" name="level">
+              <option value="beginner">مبتدئ</option>
+              <option value="active">نشط</option>
+              <option value="pro">محترف</option>
+              <option value="leader">قائد فريق</option>
+            </select>
+
+            <label for="refInput" id="lblRef">كود الإحالة</label>
+            <input id="refInput" name="ref" type="text" placeholder="MA123456" />
+
+            <div class="cta" style="margin-top:10px">
+              <button type="submit" class="btn solid" id="submitBtn">سجّل الآن</button>
+              <button type="button" class="btn ghost" id="saveRefBtn">حفظ الإحالة</button>
+              <!-- Feminine Google Form Register CTA (alternative) -->
+              <a href="https://docs.google.com/forms/d/FORM_ID/viewform" target="_blank" rel="noopener" class="btn-register" id="formGForm">✨ سجّل عبر النموذج</a>
+            </div>
+            <p class="hint" id="formStatus"></p>
+          </form>
+          <div class="success" id="refSaved" style="display:none">تم حفظ كود الإحالة محليًا</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="section" id="blog">
+      <h2 id="blogTitle">📰 المدونة — صحة وجمال بعلم وذوق</h2>
+      <p class="subtitle" id="blogSub">مقالات قصيرة واضحة تساعدك على اتخاذ قرارات صحية وذكية.</p>
+      <div class="grid cols-2">
+        <div class="card post">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <details open>
+              <summary id="post1t">فوائد الجانوديرما: دعم المناعة والتوازن</summary>
+              <p id="post1c" class="hint">لماذا يثق العالم في الريشي؟ مضادات أكسدة، توازن عام، ونمط حياة أفضل عند الاستخدام المنتظم.</p>
+            </details>
+          </div>
+        </div>
+        <div class="card post">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <details>
+              <summary id="post2t">كيف تختارين منتجًا يناسب بشرتك</summary>
+              <p id="post2c" class="hint">ابدئي بمعجون الأسنان والصابون اللطيف، ثم تابعي بمكملات تدعم الترطيب والمناعة.</p>
+            </details>
+          </div>
+        </div>
+        <div class="card post">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <details>
+              <summary id="post3t">من مبتدئة إلى محترفة خلال 90 يومًا</summary>
+              <p id="post3c" class="hint">خطة عملية: منتجات أساسية، محتوى أسبوعي، أول 30 عميل، وبناء فريق صغير متماسك.</p>
+            </details>
+          </div>
+        </div>
+        <div class="card post">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <details>
+              <summary id="post4t">قهوة صحية: طقس صباحي ذكي</summary>
+              <p id="post4c" class="hint">طاقة لطيفة دون توتر. استبدلي العادة اليومية بنسخة أذكى مع مستخلصات طبيعية.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coaching -->
+    <section class="section" id="coaching">
+      <h2 id="coachTitle">🎓 الإرشاد والمتابعة — نمّي عملك بذكاء</h2>
+      <p class="subtitle" id="coachSub">خطة إقلاع شخصية، ملفات جاهزة، ومتابعة عبر واتساب/Zoom.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3 id="planTitle" style="margin-top:0">خطة 30–90 يومًا</h3>
+          <ul class="hint" style="line-height:1.9;margin:0">
+            <li id="pl1">إتقان المنتجات الأساسية وتجربتها.</li>
+            <li id="pl2">محتوى أسبوعي متناسق مع الهوية.</li>
+            <li id="pl3">أول 30 عميل وتوثيق النتائج.</li>
+            <li id="pl4">بناء فريق أولي وتدريب دوري.</li>
+          </ul>
+          <div class="cta" style="margin-top:10px">
+            <a class="btn ghost" id="coachWhatsApp" href="#" target="_blank" rel="noopener">طلب جلسة إرشاد</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 id="assetsTitle" style="margin-top:0">حزمة الأصول</h3>
+          <details open><summary id="as1">صور وفيديوهات قصيرة</summary><p class="hint" id="as1d">لقطات أنيقة للمنتجات، نصوص قصيرة جذابة، ومواضيع متناسقة.</p></details>
+          <details><summary id="as2">نصوص إعلانية بالعربية والفرنسية</summary><p class="hint" id="as2d">عناوين، وصف، دعوات واضحة للاشتراك والطلب.</p></details>
+          <details><summary id="as3">قوالب رسائل واتساب</summary><p class="hint" id="as3d">رسائل متابعة، تحويل من مهتم إلى عميل، ودعوة للانضمام للفريق.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <h2 id="aboutTitle">🧘‍♀️ من نحن — Nouréa Bloom</h2>
+      <p class="subtitle" id="aboutSub">هوية أنثوية ذكية للصحة والجمال: منتجات مختارة، إرشاد عملي، وفرصة ترسّخ استقلالك.</p>
+      <div class="card">
+        <p class="hint" id="aboutBody">نؤمن بأن الجمال يبدأ من الداخل. نستخدم الذكاء في التسويق، واللطف في التجربة، والتوازن في المحتوى. معك خطوة بخطوة.</p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <h2 id="contactTitle">📞 اتصل بنا</h2>
+      <p class="subtitle" id="contactSub">نسعد برسالتك: أسئلة المنتجات، التسجيل، أو الإرشاد والمتابعة.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3 style="margin-top:0">نموذج المراس
+<h3 style="margin-top:0">نموذج المراسلة</h3>
+          <form id="contactForm" autocomplete="on">
+            <label for="cName">الاسم الكامل</label>
+            <input id="cName" name="name" type="text" required placeholder="مثال: فاطمة الزهراء" />
+
+            <label for="cEmail">البريد الإلكتروني</label>
+            <input id="cEmail" name="email" type="email" required placeholder="example@email.com" />
+
+            <label for="cPhone">رقم الهاتف</label>
+            <input id="cPhone" name="phone" type="tel" placeholder="+2126..." />
+
+            <label for="cMsg">رسالتك</label>
+            <textarea id="cMsg" name="message" rows="4" placeholder="كيف نقدر نساعدك؟"></textarea>
+
+            <div class="cta" style="margin-top:10px">
+              <button type="submit" class="btn solid">أرسل الرسالة</button>
+              <a class="btn ghost" id="contactWhatsApp" href="#" target="_blank" rel="noopener">واتساب مباشر</a>
+            </div>
+            <p class="hint" id="contactStatus"></p>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">معلومات التواصل</h3>
+          <details open>
+            <summary>قنوات سريعة</summary>
+            <p class="hint">واتساب، إنستغرام، فيسبوك — الروابط على يسار الصفحة.</p>
+          </details>
+          <details>
+            <summary>مواعيد الرد</summary>
+            <p class="hint">نرد خلال 24 ساعة في أيام العمل.</p>
+          </details>
+          <details>
+            <summary>جلسة تعريفية</summary>
+            <p class="hint">يمكنك حجز جلسة Zoom للتعريف بالمنتجات وفرصة العمل.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Policies -->
+    <section class="section policies" id="policies">
+      <h2>📜 السياسات والقوانين</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3 style="margin-top:0">الشروط والأحكام</h3>
+          <ul class="hint" style="line-height:1.9;margin:0">
+            <li>الأسعار والخصومات قد تتغير وفق سياسة الشركة.</li>
+            <li>الشراء عبر رابط الإحالة يُسجّل ضمن فريقي.</li>
+            <li>لا نقدم نصيحة طبية؛ استشر مختصًا عند الحاجة.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">الخصوصية</h3>
+          <ul class="hint" style="line-height:1.9;margin:0">
+            <li>قد نخزن كود الإحالة محليًا لتسهيل التسجيل.</li>
+            <li>لا نشارك بياناتك خارج متطلبات الطلب.</li>
+            <li>قنوات التواصل اختيارية وبهدف الدعم.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">التوافق القانوني</h3>
+          <ul class="hint" style="line-height:1.9;margin:0">
+            <li>الالتزام بقواعد الإشهار وعدم الادعاءات الطبية.</li>
+            <li>الامتثال لقوانين حماية المستهلك.</li>
+            <li>تجنّب الوعود الربحية المضمونة.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">الدعم</h3>
+          <p class="hint">لأي استفسار، استخدم نموذج الاتصال أو واتساب.</p>
+          <div class="cta"><a class="btn ghost" id="policyWhatsApp" href="#" target="_blank" rel="noopener">مراسلة واتساب</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> — تصميم ط. ناجمي — جميع الحقوق محفوظة — E‑Smart Market Pro AI
+  </footer>
+
+  <!-- هنا تضع سكريبتات الجافاسكريبت الخاصة بالتفاعل، حفظ الإحالة، ربط Google Sheets، عرض المنتجات، إلخ -->
+  <script>
+    // مثال: تحديث السنة تلقائيًا
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // ... باقي الأكواد التي أعددناها سابقًا
+  </script>
+</body>
+</html>
